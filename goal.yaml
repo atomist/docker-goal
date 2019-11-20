@@ -1,5 +1,5 @@
 docker-build:
-- containers:
+  containers:
   - name: docker build
     image: docker:19.03.4
     args:
