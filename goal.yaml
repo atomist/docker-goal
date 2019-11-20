@@ -18,4 +18,3 @@ docker-build:
       path: /var/run/docker.sock
   retry: true
   
----
