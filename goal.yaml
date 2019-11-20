@@ -12,6 +12,12 @@ docker-build:
     volume_mounts:
     - name: sock
       mount_path: /var/run/docker.sock
+    secrets:
+      file_mounts:
+      - mount_path: /root/.docker/config.json
+        value:
+          provider:
+            type: docker
   volumes:
   - name: sock
     host_path:
