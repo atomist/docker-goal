@@ -7,8 +7,8 @@ docker-build:
     - sh
     - -c
     - >-
-      docker build . -f Dockerfile -t atomist/${push.repo.name}:${push.after.version} &&
-      echo '{ "SdmGoal": { "push": { "after": { "images" :[{ "imageName": "atomist/${push.repo.name}:${push.after.version}" }] } } } }' > $ATOMIST_RESULT
+      docker build . -f ${parameters.dockerfile:Dockerfile} -t ${parameters.registry:${push.repo.owner}}/${push.repo.name}:${push.after.version} &&
+      echo '{ "SdmGoal": { "push": { "after": { "images" :[{ "imageName": "${parameters.registry:${push.repo.owner}}/${push.repo.name}:${push.after.version}" }] } } } }' > $ATOMIST_RESULT
     volume_mounts:
     - name: sock
       mount_path: /var/run/docker.sock
@@ -32,9 +32,9 @@ docker-build-push:
     - sh
     - -c
     - >-
-      docker build . -f Dockerfile -t atomist/${push.repo.name}:${push.after.version} &&
+      docker build . -f ${parameters.dockerfile:Dockerfile} -t ${parameters.registry:${push.repo.owner}}/${push.repo.name}:${push.after.version} &&
       docker push atomist/${push.repo.name}:${push.after.version} &&
-      echo '{ "SdmGoal": { "push": { "after": { "images" :[{ "imageName": "atomist/${push.repo.name}:${push.after.version}" }] } } } }' > $ATOMIST_RESULT
+      echo '{ "SdmGoal": { "push": { "after": { "images" :[{ "imageName": "${parameters.registry:${push.repo.owner}}/${push.repo.name}:${push.after.version}" }] } } } }' > $ATOMIST_RESULT
     secrets:
       file_mounts:
       - mount_path: /root/.docker/config.json
