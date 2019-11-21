@@ -1,6 +1,7 @@
-docker-build: &docker-build
+docker-build:
   containers:
-  - name: docker build
+  - &docker-build
+    name: docker build
     image: docker:19.03.4
     args:
     - sh
@@ -22,11 +23,11 @@ docker-build: &docker-build
     host_path:
       path: /var/run/docker.sock
   retry: true
-  
+
 docker-build-push:
-  <<: *docker-build
   containers:
-  - name: docker build push   
+  - <<: *docker-build
+    name: docker build push
     args:
     - sh
     - -c
