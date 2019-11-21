@@ -17,6 +17,9 @@ docker_build:
 
   goals:
   - atomist/docker-goal/docker-build@master:
+      parameters:
+        dockerfile: <optional relative path to Dockerfile; defaults to Dockerfile>
+        registry: <optional name of registry; defaults to Git owner/project>
       input:
       - <specify desired input cache classifiers>
 ```
@@ -33,6 +36,9 @@ docker_build:
 
   goals:
   - atomist/docker-goal/docker-build-push@master:
+      parameters:
+        dockerfile: <optional relative path to Dockerfile; defaults to Dockerfile>
+        registry: <optional name of registry; defaults to Git owner/project>
       input:
       - <specify desired input cache classifiers>
 ```
