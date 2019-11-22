@@ -5,18 +5,18 @@ Delivery Machine (SDM).
 
 ## Usage
 
-### `docker-build`
+### Docker `build`
 
 This goal runs `docker build` on your project. It does not push the created image.
 
-Put the following YAML into your SDM goal definition to use the `docker-build`
+Put the following YAML into your SDM goal definition to use the `build`
 goal.
 
 ```yaml
 docker_build:
 
   goals:
-  - atomist/docker-goal/docker-build@master:
+  - atomist/docker-goal/build@master:
       parameters:
         dockerfile: <optional relative path to Dockerfile; defaults to Dockerfile>
         registry: <optional name of registry; defaults to Git owner/project>
@@ -24,18 +24,18 @@ docker_build:
       - <specify desired input cache classifiers>
 ```
 
-### `docker-build-push`
+### Docker `build-push`
 
 This goal runs `docker build` followed by `docker push`.
 
-Put the following YAML into your SDM goal definition to use the `docker-build-push`
+Put the following YAML into your SDM goal definition to use the `build-push`
 goal.
 
 ```yaml
 docker_build:
 
   goals:
-  - atomist/docker-goal/docker-build-push@master:
+  - atomist/docker-goal/build-push@master:
       parameters:
         dockerfile: <optional relative path to Dockerfile; defaults to Dockerfile>
         registry: <optional name of registry; defaults to Git owner/project>
@@ -43,7 +43,7 @@ docker_build:
       - <specify desired input cache classifiers>
 ```
 
-The `docker-build-push` goal needs credentials to push the Docker image to a
+The `build-push` goal needs credentials to push the Docker image to a
 registry. By default the goal will make all Docker registry resource providers
 from your Atomist workspace available to the goal. 
 
