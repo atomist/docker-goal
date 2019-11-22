@@ -1,4 +1,4 @@
-docker-build:
+build:
   containers:
   - &docker-build
     name: docker build
@@ -24,7 +24,7 @@ docker-build:
       path: /var/run/docker.sock
   retry: true
 
-docker-build-push:
+build-push:
   containers:
   - <<: *docker-build
     name: docker build push
