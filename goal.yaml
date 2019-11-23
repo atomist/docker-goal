@@ -7,6 +7,7 @@ build:
     - sh
     - -c
     - >-
+      echo "atm:phase=docker build" &&
       docker build . -f ${parameters.dockerfile:Dockerfile} -t ${parameters.registry:${push.repo.owner}}/${push.repo.name}:${push.after.version} &&
       echo '{ "SdmGoal": { "push": { "after": { "images" :[{ "imageName": "${parameters.registry:${push.repo.owner}}/${push.repo.name}:${push.after.version}" }] } } } }' > $ATOMIST_RESULT
     volume_mounts:
@@ -32,7 +33,9 @@ build-push:
     - sh
     - -c
     - >-
+      echo "atm:phase=docker build" &&
       docker build . -f ${parameters.dockerfile:Dockerfile} -t ${parameters.registry:${push.repo.owner}}/${push.repo.name}:${push.after.version} &&
+      echo "atm:phase=docker push" &&
       docker push atomist/${push.repo.name}:${push.after.version} &&
       echo '{ "SdmGoal": { "push": { "after": { "images" :[{ "imageName": "${parameters.registry:${push.repo.owner}}/${push.repo.name}:${push.after.version}" }] } } } }' > $ATOMIST_RESULT
     secrets:
